@@ -1,0 +1,160 @@
+<div class="container">
+  <div class="container">
+    <div class="d-flex justify-content-between p-3">
+      <h2 class="text-xl-center font-semibold font-monospace">User List</h2>
+      <button type="button" mat-flat-button color="primary" routerLink="/form">
+        Add User
+      </button>
+    </div>
+
+    <!-- Responsive Table Wrapper -->
+    <div class="table-responsive d-none d-md-block">
+      <table class="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Address</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.age }}</td>
+            <td>{{ user.address }}</td>
+            <td>
+              <button class="btn btn-danger" (click)="delete(user._id)">
+                Delete
+              </button>
+              <button
+                class="btn btn-primary ms-2"
+                [routerLink]="'/users/' + user._id"
+              >
+                Update
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile-Friendly Cards for Small Screens -->
+    <div class="d-md-none">
+      <div class="card mt-3" *ngFor="let user of users; let i = index">
+        <div class="card-body">
+          <h5 class="card-title">#{{ i + 1 }}: {{ user.name }}</h5>
+          <p class="card-text">
+            <strong>Email:</strong> {{ user.email }} <br />
+            <strong>Age:</strong> {{ user.age }} <br />
+            <strong>Address:</strong> {{ user.address }}
+          </p>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-danger me-2" (click)="delete(user._id)">
+              Delete
+            </button>
+            <button class="btn btn-primary" [routerLink]="'/users/' + user._id">
+              Update
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div
+    class="modal fade"
+    id="addUserModal"
+    tabindex="-1"
+    aria-labelledby="addUserModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addUserModalLabel">Add New User</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                [(ngModel)]="newUser.name"
+                name="name"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                [(ngModel)]="newUser.email"
+                name="email"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="age" class="form-label">Age</label>
+              <input
+                type="number"
+                id="age"
+                class="form-control"
+                [(ngModel)]="newUser.age"
+                name="age"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <input
+                type="text"
+                id="address"
+                class="form-control"
+                [(ngModel)]="newUser.address"
+                name="address"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                [(ngModel)]="newUser.password"
+                name="password"
+                required
+              />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Close
+          </button>
+          <!-- <button type="button" class="btn btn-primary" (click)="addUser()">Save</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

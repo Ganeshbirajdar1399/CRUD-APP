@@ -1,0 +1,5 @@
+PS E:\curdapp> cd frontend
+PS E:\curdapp\frontend> npm start
+
+PS E:\curdapp> cd backend
+E:\curdapp\backend> npm start
